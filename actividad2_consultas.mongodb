@@ -1,0 +1,57 @@
+use('Corp_Adrisher');
+
+// db.dropDatabase()
+//db.Articulos.insertMany([{_id: 1,  nombre: 'MULTIFUNCION HP DESKJET 2675',  rubro: 'impresora',  precio: 3000,  stock: 20},{_id: 2,  nombre: 'MULTIFUNCION EPSON EXPRESSION XP241',  rubro: 'impresora',  precio: 3700,  stock: 5},{_id: 3,  nombre: 'LED 19 PHILIPS',  rubro: 'monitor',  precio: 4500,  stock: 2},{_id: 4,  nombre: 'LED 22 PHILIPS',  rubro: 'monitor',  precio: 5700,  stock: 4},{_id: 5,  nombre: 'LED 27 PHILIPS',  rubro: 'monitor',  precio: 12000,  stock: 1},{_id: 6,  nombre: 'LOGITECH M90',  rubro: 'mouse',  precio: 300,  stock: 4}]);
+
+
+
+//Imprimir todos los documentos de la colección 'articulos', ordenados por nombre.
+// db.Articulos.find().sort({nombre:1});
+
+//Imprimir el total de documentos de la colección 'articulos'.
+// db.Articulos.find().count();
+
+//Imprimir los dos primeros documentos de la colección 'articulos', mostrar solo los campos _id y nombre.
+// db.Articulos.find({},{"nombre":1}).limit(2);
+
+//Imprimir todos los documentos de la colección 'articulos' que son impresoras, mostrar solo los campos nombre y precio.
+//db.Articulos.find({ rubro : "impresora" }, {"_id":0, "nombre":1, "precio":1});
+
+//Imprimir todas las impresoras que tienen un precio mayor o igual a 3500. Solo mostrar los campos _id, nombre, precio y stock en formato de vector.
+//db.Articulos.find({ rubro: "impresora" ,precio : {$gte: 3500} }, {"nombre":1, "precio":1, "stock":1});
+
+//Imprimir todos los documentos de la colección 'articulos' que son monitor, mostrar solo los campos nombre y precio ordenados de menor a mayor.
+//db.Articulos.find({ rubro : "monitor" }, {"_id":0, "nombre":1, "precio":1}).sort({precio:1});
+
+//Modificar el precio del mouse 'LOGITECH M90' a 500.
+
+    /*db.Articulos.updateOne({ nombre: {$eq:"LOGITECH M90"}} , {$set: {precio:500}} );
+    db.Articulos.find({ nombre: {$eq:"LOGITECH M90"}});*/
+
+//Fijar el stock en 0 del artículo cuyo _id es 6.
+    /*db.Articulos.updateOne({ _id: {$eq:6}} , {$set: {stock:0}} );
+    db.Articulos.find({ _id: {$eq:6}});*/
+
+//Agregar el campo proveedores con el array ['Martinez','Gutierrez'] para el artículo cuyo _id es 6.
+
+    /*db.Articulos.updateOne({ _id: {$eq:6}} , {$set: {proveedores:['Martinez','Gutierrez']}} );
+    db.Articulos.find({ _id: {$eq:6}});*/
+
+//Eliminar el campo proveedores para el artículo cuyo _id es 6.
+    /*db.Articulos.updateOne({ _id: {$eq:6}} , {$unset: {proveedores:""}} );
+    db.Articulos.find({ _id: {$eq:6}});*/
+
+//Imprimir todos los documentos de la colección 'articulos'.
+//db.Articulos.find();
+
+//Fijar el stock en cero para todos los artículos del rubro monitor.
+    /*db.Articulos.updateMany({ rubro: {$eq:"monitor"}} , {$set: {stock:0}} );
+    db.Articulos.find({ rubro: {$eq:"monitor"}});*/
+
+//Agregar un campo llamado 'pedir' con el valor true para todos los artículos que tienen el campo stock en 0.
+    /*db.Articulos.updateMany({ stock: {$eq:0}} , {$set: {pedir:true}} );
+    db.Articulos.find();*/
+
+//Eliminar el campo 'pedir' de todos los documentos
+    /*db.Articulos.updateMany({} , {$unset: {pedir:""}} );
+    db.Articulos.find();*/
