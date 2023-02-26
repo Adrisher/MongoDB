@@ -1,0 +1,153 @@
+use ('Libros');
+db.Libros.insertMany([
+  {
+    _id: 1,
+    titulo: 'El aleph',
+    autor: {
+      nombre: 'Borges',
+      nacionalidad: 'Argentina'
+    },
+    editorial: ['Siglo XXI', 'Planeta'],
+    precio: 20,
+    cantidad: 50
+  },
+  {
+    _id: 2,
+    titulo: 'Martin Fierro',
+    autor: {
+      nombre: 'Jose Hernandez',
+      nacionalidad: 'Argentina'
+    },
+    editorial: ['Siglo XXI'],
+    precio: 50,
+    cantidad: 12
+  },
+  {
+    _id: 3,
+    titulo: 'Aprenda PHP',
+    autor: {
+      nombre: 'Mario Molina',
+      nacionalidad: 'Española'
+    },
+    editorial: ['Siglo XXI', 'Planeta'],
+    precio: 50,
+    cantidad: 20
+  },
+  {
+    _id: 4,
+    titulo: 'Java en 10 minutos',
+    autor: {
+      nombre: 'Desconocido',
+      nacionalidad: 'Española'
+    },
+    editorial: ['Siglo XXI'],
+    precio: 45,
+    cantidad: 1
+  }
+]);
+db.Libros.find()
+
+
+//✓ Imprimir todos los libros de autores de nacionalidad 'Argentina'. 
+db.Libros.find({ "autor.nacionalidad": "Argentina" })
+//✓ Imprimir los libros de 'Borges'. 
+db.Libros.find({ "autor.nombre": "Borges" })
+//✓ Imprimir todos los libros de nacionalidad 'Española' que cuestan 50 o más.
+db.Libros.find({ "autor.nacionalidad": "Española", precio: { $gte: 50 } })
+// -----------------------------------------------------------------------------------------
+db.Libros.drop()
+
+use ('Libros');
+
+db.Libros.insertMany(
+  [
+    {
+      _id: 1,
+      titulo: 'The big bang theory',
+      productor: 'Chuck Lorre',
+      actores: ['Johnny Galecki','Jim Parsons','Kaley Cuoco','Kunal Nayyar','Simon Helberg','Mayim Bialik','Melissa Rauch'],
+      temporada1: [
+        {
+          capitulo1:{
+            titulo:'Piloto',
+            audiencia:8300000
+          }
+        },
+        {
+          capitulo2:{
+            titulo:'La hipótesis del Gran Cerebro',
+            audiencia:8700000
+          }
+        },
+        {
+          capitulo3:{
+            titulo:'El Corolario de el Gato con Botas',
+            audiencia:9200000
+          }
+        }
+      ],
+      temporada2: [
+        {
+          capitulo1:{
+            titulo:'El paradigma del pescado malo',
+            audiencia:10000000
+          }
+        },
+        {
+          capitulo2:{
+            titulo:'La topología de la bragueta',
+            audiencia:11000000
+          }
+        }
+      ]
+    },
+    {
+      _id: 2,
+      titulo: 'The Walking Dead',
+      productor: 'Robert Kirkman',
+      actores: ['Andrew Lincoln','Jon Bernthal','Sarah Wayne Callies','Laurie Holden','Jeffrey DeMunn','Steven Yeun'],
+      temporada1: [
+        {
+          capitulo1:{
+            titulo:'TS 19',
+            audiencia:7000000
+          }
+        },
+        {
+          capitulo2:{
+            titulo:'Wildfire',
+            audiencia:8200000
+          }
+        },
+        {
+          capitulo3:{
+            titulo:'Díselo a las ranas',
+            audiencia:9100000
+          }
+        }
+      ],
+      temporada2: [
+        {
+          capitulo1:{
+            titulo:'Lo que queda por delante',
+            audiencia:12000000
+          }
+        },
+        {
+          capitulo2:{
+            titulo:'Sangría',
+            audiencia:13000000
+          }
+        }
+      ]
+    }
+  ]
+)
+db.Libros.find()
+
+//✓ Imprimir los datos de todas las temporadas de la serie 'The big bang theory'.
+db.Libros.find({titulo: 'The big bang theory'}, {temporada1: 1, temporada2: 1})
+//✓ Imprimir los datos de todos los capítulos de la primer temporada de la serie de 'The big bang theory'.
+db.Libros.find({titulo: 'The big bang theory'}, {'temporada1': 1})
+//✓ Imprimir solo el primer capítulo de la primer temporada de 'The Walking Dead'.
+db.Libros.find({titulo: 'The Walking Dead'}, {'temporada1.capitulo1': 1})
